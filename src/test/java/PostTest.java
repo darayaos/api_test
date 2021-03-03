@@ -1,7 +1,6 @@
-import helpers.RandomComment;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import model.RandomPost;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 import specifications.RequestSpecs;
@@ -22,8 +21,8 @@ public class PostTest extends BaseTest {
     @BeforeGroups("create_post")
     @Test
     public void A_createPost(){
-        //RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent()); //pregunta para el profe
 
+        //RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent()); //pregunta para el profe
         Response response = given()
                 .spec(RequestSpecs.generateToken())
                 .body(JSONData)  //.body(random)
