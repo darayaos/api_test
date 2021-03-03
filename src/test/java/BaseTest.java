@@ -8,7 +8,7 @@ public class BaseTest {
 
     @Parameters("baseUrl")
     @BeforeClass
-    public void setup(@Optional("http://localhost:9000") String baseUrl ) {
+    public void setup(@Optional("https://api-coffee-testing.herokuapp.com") String baseUrl ) {
 
         RestAssured.baseURI = baseUrl;
     }

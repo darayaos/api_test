@@ -2,10 +2,6 @@ package helpers;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
-
-import javax.xml.crypto.Data;
-
 import static io.restassured.RestAssured.given;
 
 public class RequestHelper {

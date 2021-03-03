@@ -6,7 +6,7 @@
 
     <test name="Basic Authentication Tests">
         <classes>
-            <class name="BasicAuthTests"></class>
+            <class name="PostTest"></class>
         </classes>
 
     </test>
