@@ -3,6 +3,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
+import model.RandomPost;
 import specifications.RequestSpecs;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -19,13 +20,13 @@ public class PostTest extends BaseTest {
     private static Integer my_post_id = 0;
 
     @BeforeGroups("create_post")
-    @Test
     public void A_createPost(){
-
-        //RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent()); //pregunta para el profe
+       // RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent());
+        // pregunta para el profe
         Response response = given()
                 .spec(RequestSpecs.generateToken())
-                .body(JSONData)  //.body(random)
+                .body(JSONData)
+                // .body(random)
                 .post(post);
         JsonPath jsonPathEvaluator = response.jsonPath();
         my_post_id = jsonPathEvaluator.get("id");
