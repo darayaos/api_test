@@ -13,29 +13,23 @@ public class PostTest extends BaseTest {
 
     private static String post = "/v1/post";
 
-    private static String JSONData = "" +
-            "{\"title\":\"Automation API\"," +
-            "\"content\":\"randomLoremSentence\"}";
+//    private static String JSONData = "" +
+//            "{\"title\":\"Automation API\"," +
+//            "\"content\":\"randomLoremSentence\"}";
 
     private static Integer my_post_id = 0;
 
+
     @BeforeGroups("create_post")
     public void A_createPost(){
-       // RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent());
-        // pregunta para el profe
+       RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent());
         Response response = given()
                 .spec(RequestSpecs.generateToken())
-                .body(JSONData)
-                // .body(random)
+                //.body(JSONData)
+                .body(random)
                 .post(post);
         JsonPath jsonPathEvaluator = response.jsonPath();
         my_post_id = jsonPathEvaluator.get("id");
-    }
-
-    @Test
-    public void print()
-    {
-        System.out.println("IDDDD  "+my_post_id);
     }
 
     @Test
@@ -60,13 +54,13 @@ public class PostTest extends BaseTest {
                 .statusCode(404);
     }
 
-    @Test
+    @Test(groups = "create_post")
     public void C_Get_Post_ID(){
         given()
                 .spec(RequestSpecs.generateToken())
                 .get(post + '/' + my_post_id.toString())
                 .then()
-                .body(containsString("Automation API"))
+                .body(containsString("Title"))
                 .statusCode(200);
     }
 
@@ -80,11 +74,13 @@ public class PostTest extends BaseTest {
                 .statusCode(404);
     }
 
-    @Test
+    @Test(groups = "create_post")
     public void D_Put_Post_ID(){
+
+        RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent());
         given()
                 .spec(RequestSpecs.generateToken())
-                .body(JSONData)
+                .body(random)
                 .put(post + '/' + my_post_id.toString())
                 .then()
                 .body(containsString("Post updated"))
@@ -93,16 +89,18 @@ public class PostTest extends BaseTest {
 
     @Test
     public void D_Put_Post_ID_Negative(){
+
+        RandomPost random = new RandomPost(helpers.RandomPost.generateRandomTitle(), helpers.RandomPost.generateRandomContent());
         given()
                 .spec(RequestSpecs.generateToken())
-                .body(JSONData)
+                .body(random)
                 .put(post + '/' + 99999)
                 .then()
                 .body(containsString("Post could not be updated"))
                 .statusCode(406);
     }
 
-    @Test
+    @Test(groups = "create_post")
     public void E_Delete_Post_ID(){
 
         given()
