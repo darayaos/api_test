@@ -2,9 +2,8 @@ language: java
 script:
   - mvn test -B
 notifications:
-    slack:
-      if: branch = master
-      email:
-        - darayaos18@gmail.com
-      on_success: always # default: change
-      on_failure: always
+  email:
+    recipients:
+      - darayaos18@gmail.com
+    on_success: always
+    on_failure: always
