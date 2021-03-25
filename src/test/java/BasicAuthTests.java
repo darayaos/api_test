@@ -56,6 +56,7 @@ public class BasicAuthTests extends BaseTest {
                 .body(containsString("@testemail.com"))
                 .and()
                 .statusCode(200);
+        //Test
     }
 
     @Test
